@@ -9,7 +9,7 @@ public class Client {
 	private int numero;
 	private int age;
 	private Compte[] tabComptes;
-	private static int nbreComptes = 0;
+	private static int nbreComptes;
 	
 	public Client() {}
 
@@ -27,22 +27,24 @@ public class Client {
 	 * @param unCompte
 	 */
 	public void ajouterCompte(Compte unCompte) {
-		//Je vérifie que le compte ne se trouve pas déjà dans le tableau
-		for (Compte compte : tabComptes) {
-			if(compte.getNumero()==unCompte.getNumero()) {
-				System.out.println("Impossible d'ajouter deux fois le même compte");
-				return;
-			}
-		}
 		
 		//Je vérifie que le tableau n'est pas plein.
 		if(nbreComptes>4) {
-			System.out.println("La limite de comptes/pers est de 5. Vous ne pouvez pas ajouter ce compte");
+			System.out.println("La limite de comptes/pers est de 5. Vous ne pouvez plus ajouter le compte " + unCompte.getNumero());
 		}else {
-			//j'ajoute le compte dans le tableau à la première case vide
+			//Je vérifie que le compte ne se trouve pas déjà dans le tableau
+			for(int i = 0; i<nbreComptes; i++) {
+				if(tabComptes[i].getNumero()==unCompte.getNumero()) {
+					System.out.println("Impossible d'ajouter deux fois le même compte :" + unCompte.getNumero());
+					return;
+				}
+			}
+			//Sinon j'ajoute le compte dans le tableau à la première case vide
 			tabComptes[nbreComptes] = unCompte;	
+			System.out.println("Compte " + unCompte.getNumero() + " ajoute");
 			//J'incrémente l'index du tableau
 			nbreComptes++;
+			//System.out.println("l'index du tableau est egal a " + nbreComptes);
 		}
 	}
 	
@@ -53,14 +55,15 @@ public class Client {
 	 */
 	public Compte getCompte(int numeroCompte) {
 		//Je parcours le tableau de comptes
-		for (Compte compte : tabComptes) {
+		for (Compte compte : this.tabComptes) {
+			
 			//SI les numeros matchent je renvoie le compte
-			if(compte.getNumero()==numeroCompte) {
+			if(compte.getNumero()== numeroCompte) {
 				return compte;
 			}
 		}
 		//Si je n'ai rien trouvé
-		System.out.println("Ce compte n'est pas chez ce clients");
+		System.out.println("Ce compte " + numeroCompte + " n'est pas chez ce client");
 		return null;
 	}
 
@@ -136,7 +139,7 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client [nom=" + nom + ", prenom=" + prenom + ", numero=" + numero + ", age=" + age + ", tabComptes="
+		return "Client [nom=" + nom + ", prenom=" + prenom + ", numero=" + numero + ", age=" + age + ", \ntabComptes="
 				+ Arrays.toString(tabComptes) + "]";
 	}
 

@@ -31,7 +31,7 @@ public class Compte {
 	 * @return the numero
 	 */
 	public int getNumero() {
-		return numero;
+		return this.numero;
 	}
 	/**
 	 * @param numero the numero to set
@@ -43,7 +43,7 @@ public class Compte {
 	 * @return the solde
 	 */
 	public double getSolde() {
-		return solde;
+		return this.solde;
 	}
 	/**
 	 * @param solde the solde to set
@@ -53,7 +53,7 @@ public class Compte {
 	}
 	@Override
 	public String toString() {
-		return "Compte [numero=" + numero + ", solde=" + solde + "]";
+		return "\nCompte [numero=" + numero + ", solde=" + solde + "]";
 	}
 	
 	
