@@ -66,6 +66,19 @@ public class Client {
 		System.out.println("Ce compte " + numeroCompte + " n'est pas chez ce client");
 		return null;
 	}
+	
+	/**
+	 * Je vérifie dans le tableau de comptes, les Comptes instanciés CompteRemunere et je modifie leur solde
+	 */
+	public void verserLesInteretsSurLesComptes() {
+		CompteRemunere cr;
+		for (Compte compte : tabComptes) {
+			if(compte!=null && compte.getClass().equals(CompteRemunere.class)) {
+				cr = (CompteRemunere)compte;
+				cr.verserInterets();
+			}
+		}
+	}
 
 	/**
 	 * @return the nom

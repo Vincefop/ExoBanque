@@ -1,6 +1,6 @@
 package fr.banque;
 
-public class CompteRemunere extends Compte {
+public class CompteRemunere extends Compte implements ICompteRemunere{
 	
 	private double taux;
 	
@@ -20,15 +20,15 @@ public class CompteRemunere extends Compte {
 	 * @return taux * leSolde du compte
 	 */
 	public double calculerInterets() {
-		double resultat = taux*super.getSolde();
+		double resultat = taux*super.getSolde()/100;
 		return resultat;
 	}
 	
 	/**
 	 * Permet de mettre à jour le compte en lui versant les intérêts 
 	 */
-	public void verserInterêt() {
-		this.ajouter( this.calculerInterets() + super.getSolde() );
+	public void verserInterets() {
+		this.ajouter( this.calculerInterets());
 	}
 	/**
 	 * @return the taux
@@ -44,7 +44,7 @@ public class CompteRemunere extends Compte {
 	}
 	@Override
 	public String toString() {
-		return "CompteRemunere [" + "numero = " + super.getNumero() + ", solde = " + super.getSolde() + "taux=" + this.taux + "]";
+		return "\nCompteRemunere [" + "numero = " + super.getNumero() + ", solde = " + super.getSolde() + "taux=" + this.taux + "]";
 	}
 	
 	
