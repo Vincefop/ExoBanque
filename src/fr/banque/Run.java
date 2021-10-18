@@ -1,5 +1,8 @@
 package fr.banque;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Run {
 
 	/**
@@ -43,6 +46,9 @@ public class Run {
 		
 		
 		
+		
+		
+		
 		//EXERCICE 7
 //		//Je crée un compte CompteRemunere pour les tests
 //		CompteRemunere cr = new CompteRemunere(12345, 200.00, 2.4);
@@ -68,6 +74,10 @@ public class Run {
 //		System.out.println("Je verse les interets sur les comptes :");
 //		cli.verserLesInteretsSurLesComptes();
 //		System.out.println(cli);
+		
+		
+		
+		
 		
 		
 		
@@ -107,6 +117,9 @@ public class Run {
 		
 		//J'enlève de l'argent des comptes à Seuil
 		//PAS DEMANDE
+		
+		
+		
 		
 		
 		
@@ -154,8 +167,169 @@ public class Run {
 		
 		
 		
-		//EXERCICE 10 REMPLACER UNE LISTE A LA PLACE DU TABLEAU
 		
+		
+		
+		
+		
+		
+		
+		//EXERCICE 10 REMPLACER UNE LISTE A LA PLACE DU TABLEAU
+//		Client clientList = new Client("Debuisson", "Vincent", 222, 38, new ArrayList<>());
+//		System.out.println(clientList);
+//		
+//		//j'ajoute des comptes
+//		Compte cpt1 = new Compte(12001, 250.00);
+//		
+//		try {
+//			clientList.ajouterCompte(cpt1);
+//			clientList.ajouterCompte(cpt1);// j'ajoute 2 fois le meme compte
+//			
+//			//Je crée des comptes
+//			Compte cpt2 = new Compte(12002, 200.00);
+//			Compte cpt3 = new Compte(43003, 300.00);
+//			Compte cpt4 = new Compte(52004, 400.00);
+//			Compte cpt5 = new Compte(65005, 500.00);
+//			//Je les ajoute
+//			clientList.ajouterCompte(cpt2);
+//			clientList.ajouterCompte(cpt3);
+////			clientList.ajouterCompte(cpt4);
+////			clientList.ajouterCompte(cpt5);
+//		}catch(BanqueException e)	{
+//			e.printStackTrace();
+//		}
+////		System.out.println(clientList);
+//		
+//		
+//		
+////		try {
+////			//J'ajoute le compte de trop
+////			Compte cpt6 = new Compte(12006, 600.00);
+////			clientList.ajouterCompte(cpt6);
+////		}catch(BanqueException e)	{
+////			e.printStackTrace();
+////		}
+////		System.out.println();
+////		System.out.println(clientList);
+//		
+//		
+//		//Je retire deux comptes sur CLient pour les tests suivants
+//		//((ArrayList<ICompte>)clientList.getTabComptes()).removeAll(null); // JE NE PEUX PAS RETIRER DE COMPTES
+//		
+//		//Je crée un compte CompteRemunere pour les tests
+//		CompteRemunere cr = new CompteRemunere(12345, 200.00, 2.4);
+////		System.out.println("Avec un taux a " + cr.getTaux() + "%, et un solde de " + cr.getSolde() + " les interets sont de :" + cr.calculerInterets());
+////		//je change le solde du compte en ajoutant les interets de fin d'année
+////		cr.verserInterets();
+////		System.out.println("Le solde du compte est passe à " + cr.getSolde());
+//		
+//		//Je crée un compte à seuil limite
+//		CompteASeuil cas = new CompteASeuil(54321, 100.00, 25);
+//		try {
+//			cas.retirer(50);
+//			System.out.println(cas);
+//			cas.retirer(26);
+//			System.out.println(cas);
+//		}catch(BanqueException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		//Je rajoute ces comptes à un Client
+//		try {
+//			clientList.ajouterCompte(cr);
+//			clientList.ajouterCompte(cas);
+//		}catch(BanqueException e)	{
+//			e.printStackTrace();
+//		}
+//		System.out.println(clientList);
+//		//Je verse les intérets sur les comptes qui peuvent être rémunérés
+//		System.out.println("Je verse les interets sur les comptes :");
+//		clientList.verserLesInteretsSurLesComptes();
+//		System.out.println(clientList);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//REMPLACEMENT PAR UNE MAP
+		Client clientList = new Client("Debuisson", "Vincent", 222, 38, new HashMap<>());
+		System.out.println(clientList);
+		
+		//j'ajoute des comptes
+		Compte cpt1 = new Compte(12001, 250.00);
+		
+		try {
+			clientList.ajouterCompte(cpt1);
+			clientList.ajouterCompte(cpt1);// j'ajoute 2 fois le meme compte
+			
+			//Je crée des comptes
+			Compte cpt2 = new Compte(12002, 200.00);
+			Compte cpt3 = new Compte(43003, 300.00);
+			Compte cpt4 = new Compte(52004, 400.00);
+			Compte cpt5 = new Compte(65005, 500.00);
+			//Je les ajoute
+			clientList.ajouterCompte(cpt2);
+			clientList.ajouterCompte(cpt3);
+//			clientList.ajouterCompte(cpt4);
+//			clientList.ajouterCompte(cpt5);
+		}catch(BanqueException e)	{
+			e.printStackTrace();
+		}
+//		System.out.println(clientList);
+		
+		
+		
+//		try {
+//			//J'ajoute le compte de trop
+//			Compte cpt6 = new Compte(12006, 600.00);
+//			clientList.ajouterCompte(cpt6);
+//		}catch(BanqueException e)	{
+//			e.printStackTrace();
+//		}
+//		System.out.println();
+//		System.out.println(clientList);
+		
+		
+		//Je retire deux comptes sur CLient pour les tests suivants
+		//((ArrayList<ICompte>)clientList.getTabComptes()).removeAll(null); // JE NE PEUX PAS RETIRER DE COMPTES
+		
+		//Je crée un compte CompteRemunere pour les tests
+		CompteRemunere cr = new CompteRemunere(12345, 200.00, 2.4);
+//		System.out.println("Avec un taux a " + cr.getTaux() + "%, et un solde de " + cr.getSolde() + " les interets sont de :" + cr.calculerInterets());
+//		//je change le solde du compte en ajoutant les interets de fin d'année
+//		cr.verserInterets();
+//		System.out.println("Le solde du compte est passe à " + cr.getSolde());
+		
+		//Je crée un compte à seuil limite
+		CompteASeuil cas = new CompteASeuil(54321, 100.00, 25);
+		try {
+			cas.retirer(50);
+			System.out.println(cas);
+			cas.retirer(26);
+			System.out.println(cas);
+		}catch(BanqueException e) {
+			e.printStackTrace();
+		}
+		
+		//Je rajoute ces comptes à un Client
+		try {
+			clientList.ajouterCompte(cr);
+			clientList.ajouterCompte(cas);
+		}catch(BanqueException e)	{
+			e.printStackTrace();
+		}
+		System.out.println(clientList);
+		//Je verse les intérets sur les comptes qui peuvent être rémunérés
+		System.out.println("Je verse les interets sur les comptes :");
+		clientList.verserLesInteretsSurLesComptes();
+		System.out.println(clientList);
 		
 	}
 

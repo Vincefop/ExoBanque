@@ -1,23 +1,31 @@
 package fr.banque;
 
+import java.util.Objects;
+
 public class Compte implements ICompte {
+	
+	//ATTRIBUTS
 	private int numero;
 	private double solde;
 	
+	//CONSTRUCTEURS
 	public Compte() {
-		
+		super();
 	}
 	public Compte(int numero, double solde) {
+		super();	
 		this.numero=numero;
 		this.solde=solde;
 	}
 	
+	
+	//METHODES
 	/**
 	 * Methode qui ajoute de l'argent au solde
 	 * @param montant le montant ajouté
 	 */
 	public void ajouter(double montant) {
-		this.solde += montant;
+		this.setSolde( Math.round (this.getSolde() + montant) ); //utiliser les getters et les setters un maximum
 	}
 	
 	/**
@@ -25,20 +33,16 @@ public class Compte implements ICompte {
 	 * @param montant le montant à enlever
 	 */
 	public void enlever(double montant) throws BanqueException	{
-		this.solde -= montant; 
-		//if(this.solde < ) throw new BanqueException();
+		this.setSolde(Math.round(this.getSolde() - montant));  		//On fait un arrondi car sur des doubles on a parfois des chiffres trop long
 	}
+	
+	
+	//GETTERS SETTERS OU ACCESSEURS
 	/**
 	 * @return the numero
 	 */
 	public int getNumero() {
 		return this.numero;
-	}
-	/**
-	 * @param numero the numero to set
-	 */
-	public void setNumero(int numero) { 		// ON A DU PASSER CETTE METHODE EN PUBLIC
-		this.numero = numero;
 	}
 	/**
 	 * @return the solde
@@ -49,12 +53,31 @@ public class Compte implements ICompte {
 	/**
 	 * @param solde the solde to set
 	 */
-	public void setSolde(double solde) {		// ON A DU PASSER CETTE METHODE EN PUBLIC
+	public void setSolde(double solde) {
 		this.solde = solde;
 	}
+	//TOSTRING
 	@Override
 	public String toString() {
-		return "\nCompte [numero=" + numero + ", solde=" + solde + "]";
+		return "\nCompte [numero=" + this.getNumero() + ", solde=" + this.getSolde() + "]";
+	}
+	
+	//Fonction de hashage qui permet de coder la classe de manière aléatoire. 
+	//Si la meême classe est hachées 2 fois on aura le meme résultat
+	@Override
+	public int hashCode() {
+		return Objects.hash(numero, solde);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Compte other = (Compte) obj;
+		return numero == other.numero && Double.doubleToLongBits(solde) == Double.doubleToLongBits(other.solde);
 	}
 	
 	

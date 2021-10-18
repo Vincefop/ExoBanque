@@ -21,12 +21,11 @@ public class CompteASeuil extends Compte implements ICompteASeuil {
 		double newSolde = super.getSolde() - uneValeur;
 		//je vérifie si le solde moins la valeur sont plus petits que le seuil
 		if( newSolde < this.seuil) {
-			System.out.println("Votre seuil " + seuil + " ne vous permet pas de faire ce retrait. "
+			throw new BanqueException("Votre seuil " + seuil + " ne vous permet pas de faire ce retrait. "
 					+ "\nVous n'auriez plus que " + newSolde);
 		}else {
 			//sinon je fais la transaction
 			super.enlever(uneValeur); 
-			if(this.getSolde()<this.seuil) throw new BanqueException();
 		}
 	}
 

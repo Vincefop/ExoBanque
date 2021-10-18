@@ -2,19 +2,31 @@ package fr.banque;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Client {
 	
+	//ATTRIBUTS
 	private String nom;
 	private String prenom;
 	private int numero;
 	private int age;
-	private List<ICompte> tabComptes;
+	private Map<Integer, ICompte> tabComptes;
 	private static int nbreComptes;
 	
-	public Client() {}
-
-	public Client(String nom, String prenom, int numero, int age, List<ICompte> tabComptes) {
+	//CONSTRUCTEURS	
+	public Client() {
+		super();
+	}
+	public Client(String nom, String prenom, int numero, int age) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.numero = numero;
+		this.age = age;
+	}
+	public Client(String nom, String prenom, int numero, int age, Map<Integer, ICompte> tabComptes) {
+		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.numero = numero;
@@ -33,22 +45,39 @@ public class Client {
 		if(nbreComptes>4) {
 			throw new BanqueException("La limite de comptes/pers est de 5. Vous ne pouvez plus ajouter le compte " + unCompte.getNumero());
 		}else {
-			//Je vérifie que le compte ne se trouve pas déjà dans le tableau/ DANS LA LISTE
+			//Je vérifie que le compte ne se trouve pas déjà dans le tableau/ DANS LA LISTE / DANS LA HASHMAP
+			//TABLEAU
 //			for(int i = 0; i<nbreComptes; i++) {
 //				if(tabComptes[i].getNumero()==unCompte.getNumero()) {
 //					System.out.println("Impossible d'ajouter deux fois le même compte :" + unCompte.getNumero());
 //					return;
 //				}
 //			}
-			if(tabComptes.contains(unCompte)) {
+			//LIST
+//			if(tabComptes.contains(unCompte)) {
+//				System.out.println("Impossible d'ajouter deux fois le même compte :" + unCompte.getNumero());
+//				return;
+//			}
+			//HASHMAP
+			if(this.tabComptes.containsKey(unCompte.getNumero())) {
 				System.out.println("Impossible d'ajouter deux fois le même compte :" + unCompte.getNumero());
 				return;
 			}
-//			//Sinon j'ajoute le compte dans le tableau à la première case vide
+			
+			
+			
+//			//TABLEAU : Sinon j'ajoute le compte dans le tableau à la première case vide 
 //			tabComptes[nbreComptes] = unCompte;	
-			//Je modifie en Liste
-			tabComptes.add(unCompte);
-			//System.out.println("Compte " + unCompte.getNumero() + " ajoute");
+			
+			
+			//LIST Je modifie en Liste 
+//			tabComptes.add(unCompte);
+			
+			
+			//HASHMAP
+			tabComptes.put(unCompte.getNumero(), unCompte);
+			
+			
 			//J'incrémente l'index du tableau
 			nbreComptes++;
 			//System.out.println("l'index du tableau est egal a " + nbreComptes);
@@ -62,31 +91,53 @@ public class Client {
 	 */
 	public ICompte getCompte(int numeroCompte) {
 		//Je parcours le tableau de comptes
-		for (ICompte compte : this.tabComptes) {
-			
-			//SI les numeros matchent je renvoie le compte
-			if(compte.getNumero()== numeroCompte) {
-				return compte;
-			}
+		//TABLEAU OU LISTE
+//		for (ICompte compte : this.tabComptes) {
+//			
+//			//SI les numeros matchent je renvoie le compte
+//			if(compte.getNumero()== numeroCompte) {
+//				return compte;
+//			}
+//		}
+		
+		//HASHMAP
+		ICompte res = null;
+		if(tabComptes.containsKey(numeroCompte)) {
+			res = tabComptes.get(numeroCompte);
 		}
-		//Si je n'ai rien trouvé
-		System.out.println("Ce compte " + numeroCompte + " n'est pas chez ce client");
-		return null;
+		
+		
+		
+//		//Si je n'ai rien trouvé
+		if(res==null)
+			System.out.println("Ce compte " + numeroCompte + " n'est pas chez ce client");
+//		return null;
+		
+		return res;
 	}
 	
 	/**
 	 * Je vérifie dans le tableau de comptes, les Comptes instanciés CompteRemunere et je modifie leur solde
 	 */
 	public void verserLesInteretsSurLesComptes() {
-		ICompteRemunere cr;
-		for (ICompte compte : tabComptes) {
-			if(compte!=null && compte instanceof ICompteRemunere) {
-			//if(compte!=null && compte.getClass().equals(ICompteRemunere.class)) {
-				cr = (ICompteRemunere)compte;
-				//System.out.println("J'affiche le compte dont on verse les intereets ici" + cr);
-				cr.verserInterets();
+		//POUR LES LIST / TABLEAUX
+//		ICompteRemunere cr;
+//		for (ICompte compte : tabComptes) {
+//			if(compte!=null && compte instanceof ICompteRemunere) {
+//			//if(compte!=null && compte.getClass().equals(ICompteRemunere.class)) {
+//				cr = (ICompteRemunere)compte;
+//				//System.out.println("J'affiche le compte dont on verse les intereets ici" + cr);
+//				cr.verserInterets();
+//			}
+//		}
+		
+		//POUR LES HASHMAP
+		for(Map.Entry<Integer, ICompte> mapEntry : tabComptes.entrySet()) {
+			if(mapEntry.getValue() instanceof ICompteRemunere) {
+				((ICompteRemunere)mapEntry.getValue()).verserInterets();
 			}
 		}
+		
 	}
 
 	/**
@@ -148,15 +199,46 @@ public class Client {
 	/**
 	 * @return the tabComptes
 	 */
-	public List<ICompte> getTabComptes() {
-		return tabComptes;
+	public ICompte[] getTabComptes() {
+		
+		//POUR LES TABLEAUX 
+//		return tabComptes;
+		
+		
+		//POUR LES LISTES
+		//return (ICompte[]) tabComptes.toArray();
+		
+		//POUR LES HASHMAPS
+		//Je crée un nouveau tableau vide
+		ICompte[] res = new ICompte[5];
+		int i=0;
+		//je vais remplir ce tableau avec chaque ICOmpte de la map
+		for(Map.Entry<Integer, ICompte> mapEntry : tabComptes.entrySet()) {
+			res[i] = mapEntry.getValue();
+			i++;
+		}
+		return res;
 	}
 
 	/**
 	 * @param tabComptes the tabComptes to set
 	 */
-	public void setTabComptes(List<ICompte> tabComptes) {
-		this.tabComptes = tabComptes;
+	public void setTabComptes(ICompte[] tabComptes) {
+		//POUR LES TABLEAUX 
+//		if(tabComptes.length!=5) {
+//			System.out.println("Le tableau de comptes doit contenur 5 comptes");
+//		}else {
+//			this.tabComptes = tabComptes;
+//		}
+		
+		//POUR LES MAPS
+		//Je vide la map au cas ou
+		this.tabComptes.clear();
+		//je vais ajouter chaque compte sur la map
+		for(int i=0; i<tabComptes.length; i++) {
+			this.tabComptes.put(tabComptes[i].getNumero(), tabComptes[i]);
+			
+		}
 	}
 
 	//TO STRING POUR LA LISTE
