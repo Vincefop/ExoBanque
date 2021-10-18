@@ -3,6 +3,22 @@ package fr.banque;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import fr.banque.module.BanqueException;
+import fr.banque.module.Client;
+import fr.banque.module.Compte;
+import fr.banque.module.CompteASeuil;
+import fr.banque.module.CompteRemunere;
+
+
+
+//TODO Faire des fonctions de test pour chaque exercice. 
+//chaque exo pourrait rappeler des fonctions de tests des exos précédents
+// ça évit de mettre en commentaire les paquets de code
+
+
+
+
+
 public class Run {
 
 	/**

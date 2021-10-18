@@ -1,4 +1,4 @@
-package fr.banque;
+package fr.banque.module;
 
 public interface ICompteASeuil extends ICompte {
 

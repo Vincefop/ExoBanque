@@ -1,4 +1,4 @@
-package fr.banque;
+package fr.banque.module;
 
 import java.util.Arrays;
 import java.util.List;
@@ -91,12 +91,13 @@ public class Client {
 	 */
 	public ICompte getCompte(int numeroCompte) {
 		//Je parcours le tableau de comptes
-		//TABLEAU OU LISTE
+		//TABLEAU
+//		ICompte res = null;
 //		for (ICompte compte : this.tabComptes) {
 //			
 //			//SI les numeros matchent je renvoie le compte
 //			if(compte.getNumero()== numeroCompte) {
-//				return compte;
+//				res= compte;
 //			}
 //		}
 		

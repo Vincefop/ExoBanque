@@ -1,4 +1,4 @@
-package fr.banque;
+package fr.banque.module;
 
 public class CompteASeuil extends Compte implements ICompteASeuil {
 	private double seuil;

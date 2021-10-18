@@ -1,4 +1,4 @@
-package fr.banque;
+package fr.banque.module;
 
 public class CompteASeuilRemunere extends CompteASeuil implements ICompteRemunere, ICompteASeuil{
 

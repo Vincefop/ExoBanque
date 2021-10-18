@@ -1,4 +1,4 @@
-package fr.banque;
+package fr.banque.module;
 
 import java.util.Objects;
 
@@ -25,7 +25,7 @@ public class Compte implements ICompte {
 	 * @param montant le montant ajouté
 	 */
 	public void ajouter(double montant) {
-		this.setSolde( Math.round (this.getSolde() + montant) ); //utiliser les getters et les setters un maximum
+		this.setSolde(this.getSolde() + montant); //utiliser les getters et les setters un maximum
 	}
 	
 	/**
@@ -33,7 +33,8 @@ public class Compte implements ICompte {
 	 * @param montant le montant à enlever
 	 */
 	public void enlever(double montant) throws BanqueException	{
-		this.setSolde(Math.round(this.getSolde() - montant));  		//On fait un arrondi car sur des doubles on a parfois des chiffres trop long
+		
+		this.setSolde(this.getSolde() - montant);   
 	}
 	
 	

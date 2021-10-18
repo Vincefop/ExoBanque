@@ -1,4 +1,4 @@
-package fr.banque;
+package fr.banque.module;
 
 public class BanqueException extends Exception{
 	
