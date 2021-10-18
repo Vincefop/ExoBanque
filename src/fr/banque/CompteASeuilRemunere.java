@@ -14,45 +14,50 @@ public class CompteASeuilRemunere extends CompteASeuil implements ICompteRemuner
 	
 	
 	@Override
-	public void retirer(double uneValeur) {
-		// TODO Auto-generated method stub
-		
+	public void retirer(double uneValeur) throws BanqueException{
+		super.retirer(uneValeur);
 	}
 
 	@Override
 	public double getSeuil() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.getSeuil();
 	}
 
 	@Override
 	public void setSeuil(double seuil) {
-		// TODO Auto-generated method stub
+		super.setSeuil(seuil);
 		
 	}
 
 	@Override
 	public double calculerInterets() {
-		// TODO Auto-generated method stub
-		return 0;
+		double resultat = taux*super.getSolde()/100;
+		return resultat;
 	}
 
 	@Override
 	public void verserInterets() {
-		// TODO Auto-generated method stub
-		
+		this.ajouter( this.calculerInterets());
 	}
 
 	@Override
 	public double getTaux() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.taux;
 	}
 
 	@Override
 	public void setTaux(double unTaux) {
-		// TODO Auto-generated method stub
+		this.taux = unTaux;
 	}
+	@Override
+	public String toString() {
+		return "\nCompteASeuilRemunere [Numero=" + super.getNumero() 
+			+ ", Solde=" + super.getSolde() 
+			+ ", Seuil()=" + this.getSeuil() 
+			+ ", taux()=" + this.taux + "]";
+	}
+	
+	
 	
 	
 	

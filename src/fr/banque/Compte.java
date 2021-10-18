@@ -1,6 +1,6 @@
 package fr.banque;
 
-public class Compte {
+public class Compte implements ICompte {
 	private int numero;
 	private double solde;
 	
@@ -24,8 +24,9 @@ public class Compte {
 	 * Mthode qui enlève un montant au solde
 	 * @param montant le montant à enlever
 	 */
-	public void enlever(double montant) {
-		this.solde -= montant;
+	public void enlever(double montant) throws BanqueException	{
+		this.solde -= montant; 
+		//if(this.solde < ) throw new BanqueException();
 	}
 	/**
 	 * @return the numero
@@ -36,7 +37,7 @@ public class Compte {
 	/**
 	 * @param numero the numero to set
 	 */
-	private void setNumero(int numero) {
+	public void setNumero(int numero) { 		// ON A DU PASSER CETTE METHODE EN PUBLIC
 		this.numero = numero;
 	}
 	/**
@@ -48,7 +49,7 @@ public class Compte {
 	/**
 	 * @param solde the solde to set
 	 */
-	private void setSolde(double solde) {
+	public void setSolde(double solde) {		// ON A DU PASSER CETTE METHODE EN PUBLIC
 		this.solde = solde;
 	}
 	@Override

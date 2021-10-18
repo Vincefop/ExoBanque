@@ -16,7 +16,7 @@ public class CompteASeuil extends Compte implements ICompteASeuil {
 	 * retire un montant uneValeur du solde si et seulement si le solde du compte ne passe pas en dessous du seuilS
 	 * @param uneValeur
 	 */
-	public void retirer(double uneValeur) {
+	public void retirer(double uneValeur) throws BanqueException {
 		//Je calcul le nouveau solde si la transaction a lieu
 		double newSolde = super.getSolde() - uneValeur;
 		//je vérifie si le solde moins la valeur sont plus petits que le seuil
@@ -25,7 +25,8 @@ public class CompteASeuil extends Compte implements ICompteASeuil {
 					+ "\nVous n'auriez plus que " + newSolde);
 		}else {
 			//sinon je fais la transaction
-			super.enlever(uneValeur);
+			super.enlever(uneValeur); 
+			if(this.getSolde()<this.seuil) throw new BanqueException();
 		}
 	}
 
@@ -45,7 +46,7 @@ public class CompteASeuil extends Compte implements ICompteASeuil {
 
 	@Override
 	public String toString() {
-		return "\nCompteASeuil [ numero = " + getNumero() + ", solde = " + getSolde() + "seuil= " + this.seuil + " ]";
+		return "\nCompteASeuil [ numero = " + getNumero() + ", solde = " + getSolde() + ", seuil= " + this.seuil + " ]";
 	}
 	
 	

@@ -2,6 +2,9 @@ package fr.banque;
 
 public class Run {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		//Je crée un client
@@ -36,30 +39,123 @@ public class Run {
 //		System.out.println(cptRecupPas);
 		
 		
+		
+		
+		
+		
 		//EXERCICE 7
-		//Je crée un compte CompteRemunere pour les tests
-		CompteRemunere cr = new CompteRemunere(12345, 200.00, 2.4);
-		System.out.println("Avec un taux a " + cr.getTaux() + "%, et un solde de " + cr.getSolde() + " les interets sont de :" + cr.calculerInterets());
-		//je change le solde du compte en ajoutant les interets de fin d'année
-		cr.verserInterets();
-		System.out.println("Le solde du compte est passe à " + cr.getSolde());
+//		//Je crée un compte CompteRemunere pour les tests
+//		CompteRemunere cr = new CompteRemunere(12345, 200.00, 2.4);
+////		System.out.println("Avec un taux a " + cr.getTaux() + "%, et un solde de " + cr.getSolde() + " les interets sont de :" + cr.calculerInterets());
+////		//je change le solde du compte en ajoutant les interets de fin d'année
+////		cr.verserInterets();
+////		System.out.println("Le solde du compte est passe à " + cr.getSolde());
+//		
+//		//Je crée un compte à seuil limite
+//		CompteASeuil cas = new CompteASeuil(54321, 100.00, 25);
+////		cas.retirer(50);
+////		System.out.println(cas);
+////		cas.retirer(26);
+////		System.out.println(cas);
+//		
+//		//Je rajoute ces comptes à un Client
+//		Client cli = new Client("Debuisson", "Vincent", 22022, 38, new Compte[5]);
+//		cli.ajouterCompte(cr);
+//		cli.ajouterCompte(cas);
+//		cli.ajouterCompte(new Compte(999, 120.00));
+//		System.out.println(cli);
+//		//Je verse les intérets sur les comptes qui peuvent être rémunérés
+//		System.out.println("Je verse les interets sur les comptes :");
+//		cli.verserLesInteretsSurLesComptes();
+//		System.out.println(cli);
 		
-		//Je crée un compte à seuil limite
-		CompteASeuil cas = new CompteASeuil(54321, 100.00, 25);
-		cas.retirer(50);
-		System.out.println(cas);
-		cas.retirer(26);
-		System.out.println(cas);
 		
-		//Je rajoute ces comptes à un Client
-		Client cli = new Client("Debuisson", "Vincent", 22022, 38, new Compte[5]);
-		cli.ajouterCompte(cr);
-		cli.ajouterCompte(cas);
-		cli.ajouterCompte(new Compte(999, 120.00));
-		System.out.println(cli);
 		
-		cli.verserLesInteretsSurLesComptes();
-		System.out.println(cli);
+		
+		
+		
+		
+		//EXERCICE 8 : Ajout COmpteASeuilRémunere
+//		
+//		//Je crée un client 
+//		Client cli2 = new Client("Debuisson", "Vincent", 22022, 38, new Compte[5]);
+//		//Je crée un compte CompteRemunere pour les tests
+//		ICompteRemunere cr2 = new CompteRemunere(12345, 200.00, 2.4);
+//		//Je crée un compte à seuil limite
+//		ICompteASeuil cas2 = new CompteASeuil(54321, 100.00, 25);
+//		//Je crée un compte à seuil limite rémunere
+//		ICompteASeuil casr2 = new CompteASeuilRemunere(0121212, 150, 25, 2.2);
+//		
+//		//J'ajoute les comptes à mon client
+//		try {
+//			cli2.ajouterCompte(cr2);
+//			cli2.ajouterCompte(cas2);
+//			cli2.ajouterCompte(new Compte(999, 120.00));
+//			cli2.ajouterCompte(casr2);
+//		}catch(BanqueException e) {
+//			System.out.println("Le tableau de compte est plein");
+//			e.printStackTrace();
+//		}
+//		
+//		//J'affice ce client
+//		System.out.println(cli2);
+//		
+//		//Je verse les intérets sur les comptes qui peuvent être rémunérés
+//		System.out.println("Je verse les interets sur les comptes :");
+//		cli2.verserLesInteretsSurLesComptes();
+//		System.out.println(cli2);
+		
+		//J'enlève de l'argent des comptes à Seuil
+		//PAS DEMANDE
+		
+		
+		
+		
+		
+		
+		
+		//EXERCICE 9 AJOUT DE L'EXCEPTION BANQUEEXCEPTION
+//		//Je crée un client 
+//		Client cli3 = new Client("Debuisson", "Vincent", 22022, 38, new Compte[5]);
+//		//Je crée un compte CompteRemunere pour les tests
+//		ICompteRemunere cr3 = new CompteRemunere(12345, 200.00, 2.4);
+//		//Je crée un compte à seuil limite
+//		ICompteASeuil cas3 = new CompteASeuil(54321, 100.00, 25);
+//		//Je crée un compte à seuil limite rémunere
+//		ICompteASeuil casr3 = new CompteASeuilRemunere(0121212, 150, 25, 2.2);
+//		
+//		//J'ajoute les comptes à mon client
+//		try {
+//			cli3.ajouterCompte(cr3);
+//			cli3.ajouterCompte(cas3);
+//			cli3.ajouterCompte(new Compte(999, 120.00));
+//			cli3.ajouterCompte(casr3);
+//			cli3.ajouterCompte(new Compte(10001, 300.00));
+//			cli3.ajouterCompte(new Compte(10002, 300.00));
+//		}catch(BanqueException e) {
+//			System.out.println("Le tableau de compte est plein");
+//			e.printStackTrace();
+//		}
+//		System.out.println("Apres l'exception");
+//		
+//		//Je retire plus que ce qu'il faut sur le compteASeuil
+//		try {
+//		for (ICompte compte : cli3.getTabComptes()) {
+//			if(compte instanceof CompteASeuil) {
+//				((CompteASeuil) compte).retirer(100);
+//			}
+//		}
+//		}catch(BanqueException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println(cli3);
+
+		
+		
+		
+		
+		//EXERCICE 10 REMPLACER UNE LISTE A LA PLACE DU TABLEAU
+		
 		
 	}
 

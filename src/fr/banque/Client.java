@@ -1,6 +1,7 @@
 package fr.banque;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Client {
 	
@@ -8,12 +9,12 @@ public class Client {
 	private String prenom;
 	private int numero;
 	private int age;
-	private Compte[] tabComptes;
+	private List<ICompte> tabComptes;
 	private static int nbreComptes;
 	
 	public Client() {}
 
-	public Client(String nom, String prenom, int numero, int age, Compte[] tabComptes) {
+	public Client(String nom, String prenom, int numero, int age, List<ICompte> tabComptes) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.numero = numero;
@@ -26,22 +27,28 @@ public class Client {
 	 * on pourrait ajouter qu'il ne peut pas y avoir 2 comptes avec le même numero dans le tableau
 	 * @param unCompte
 	 */
-	public void ajouterCompte(Compte unCompte) {
+	public void ajouterCompte(ICompte unCompte) throws BanqueException{
 		
 		//Je vérifie que le tableau n'est pas plein.
 		if(nbreComptes>4) {
-			System.out.println("La limite de comptes/pers est de 5. Vous ne pouvez plus ajouter le compte " + unCompte.getNumero());
+			throw new BanqueException("La limite de comptes/pers est de 5. Vous ne pouvez plus ajouter le compte " + unCompte.getNumero());
 		}else {
-			//Je vérifie que le compte ne se trouve pas déjà dans le tableau
-			for(int i = 0; i<nbreComptes; i++) {
-				if(tabComptes[i].getNumero()==unCompte.getNumero()) {
-					System.out.println("Impossible d'ajouter deux fois le même compte :" + unCompte.getNumero());
-					return;
-				}
+			//Je vérifie que le compte ne se trouve pas déjà dans le tableau/ DANS LA LISTE
+//			for(int i = 0; i<nbreComptes; i++) {
+//				if(tabComptes[i].getNumero()==unCompte.getNumero()) {
+//					System.out.println("Impossible d'ajouter deux fois le même compte :" + unCompte.getNumero());
+//					return;
+//				}
+//			}
+			if(tabComptes.contains(unCompte)) {
+				System.out.println("Impossible d'ajouter deux fois le même compte :" + unCompte.getNumero());
+				return;
 			}
-			//Sinon j'ajoute le compte dans le tableau à la première case vide
-			tabComptes[nbreComptes] = unCompte;	
-			System.out.println("Compte " + unCompte.getNumero() + " ajoute");
+//			//Sinon j'ajoute le compte dans le tableau à la première case vide
+//			tabComptes[nbreComptes] = unCompte;	
+			//Je modifie en Liste
+			tabComptes.add(unCompte);
+			//System.out.println("Compte " + unCompte.getNumero() + " ajoute");
 			//J'incrémente l'index du tableau
 			nbreComptes++;
 			//System.out.println("l'index du tableau est egal a " + nbreComptes);
@@ -53,9 +60,9 @@ public class Client {
 	 * @param numeroCompte
 	 * @return un Compte dont le numero correspond au numero en paramètre
 	 */
-	public Compte getCompte(int numeroCompte) {
+	public ICompte getCompte(int numeroCompte) {
 		//Je parcours le tableau de comptes
-		for (Compte compte : this.tabComptes) {
+		for (ICompte compte : this.tabComptes) {
 			
 			//SI les numeros matchent je renvoie le compte
 			if(compte.getNumero()== numeroCompte) {
@@ -71,10 +78,12 @@ public class Client {
 	 * Je vérifie dans le tableau de comptes, les Comptes instanciés CompteRemunere et je modifie leur solde
 	 */
 	public void verserLesInteretsSurLesComptes() {
-		CompteRemunere cr;
-		for (Compte compte : tabComptes) {
-			if(compte!=null && compte.getClass().equals(CompteRemunere.class)) {
-				cr = (CompteRemunere)compte;
+		ICompteRemunere cr;
+		for (ICompte compte : tabComptes) {
+			if(compte!=null && compte instanceof ICompteRemunere) {
+			//if(compte!=null && compte.getClass().equals(ICompteRemunere.class)) {
+				cr = (ICompteRemunere)compte;
+				//System.out.println("J'affiche le compte dont on verse les intereets ici" + cr);
 				cr.verserInterets();
 			}
 		}
@@ -139,23 +148,32 @@ public class Client {
 	/**
 	 * @return the tabComptes
 	 */
-	public Compte[] getTabComptes() {
+	public List<ICompte> getTabComptes() {
 		return tabComptes;
 	}
 
 	/**
 	 * @param tabComptes the tabComptes to set
 	 */
-	public void setTabComptes(Compte[] tabComptes) {
+	public void setTabComptes(List<ICompte> tabComptes) {
 		this.tabComptes = tabComptes;
 	}
 
+	//TO STRING POUR LA LISTE
 	@Override
 	public String toString() {
-		return "Client [nom=" + nom + ", prenom=" + prenom + ", numero=" + numero + ", age=" + age + ", \ntabComptes="
-				+ Arrays.toString(tabComptes) + "]";
+		return "Client [nom=" + nom + ", prenom=" + prenom + ", numero=" + numero + ", age=" + age + ", tabComptes="
+				+ tabComptes + "]";
 	}
 
+	//TO STRING POUR LE TABLEAU
+//	@Override
+//	public String toString() {
+//		return "Client [nom=" + nom + ", prenom=" + prenom + ", numero=" + numero + ", age=" + age + ", \ntabComptes="
+//				+ Arrays.toString(tabComptes) + "]\n";
+//	}
+
+	
 	
 	
 }
